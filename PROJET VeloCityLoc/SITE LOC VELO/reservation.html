@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>VeloCityLoc</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!--Code CSS-->
+<link rel="stylesheet" href="style.css">
+
+
+  </head>
+
+<body>
+
+<!--NAV BAR -->
+<section class="navbar justify-content-center navbar-dark bg-secondary sticky-top">
+    <ul class="nav p-3 ">
+        <li class="nav-link">
+          <a class="nav-item" href="/index.html">ACCEUIL</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link prix" href="/tarif.html">PRIX</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link louer" href="/reservation.html">LOUER</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link email" href="#">E-MAIL</a>
+          </li>
+     <!-- <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li> -->
+      </ul>    
+  </section>
+
+  <!--BANDEAU RESERVATION -->
+  <div class="container mt-3">
+    <section>
+      <h2 class="bg-warning text-center p-3 mb-5 border border-dark">RESERVATION</h2>
+    </section>
+
+    <!--TITRE COORDONNES-->
+    <section class="m-2">
+    <section>
+      <div class="row">
+        <h4 class="bg-warning text-center p-3 mb-5 rounded ">COORDONNEES</h4>
+      </div>
+    </section>
+    <!--SELECTION PARTICULIER OU PROFESSIONNEL-->
+    <section class="mt-3">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioParticulier"
+          value="option1">
+        <label class="form-check-label" for="inlineRadioParticulier">Particulier</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioPro" value="option2">
+        <label class="form-check-label" for="inlineRadioPro">Professionnel</label>
+      </div>
+    </section>
+
+    <!--FORMULAIRE COORDONNEES CLIENT-->
+    <form>
+      <div class="row mt-3">
+        <div class="col-md-3 ">
+          <label for="Nom">Nom</label>
+          <input type="text" class="form-control" placeholder="Nom">
+        </div>
+        <div class="col-md-3">
+          <label for="Prenom">Prénom</label>
+          <input type="text" class="form-control" placeholder="Prénom">
+        </div>
+        <div class="col-md-4">
+          <label for="Adresse">Adresse</label>
+          <input type="text" class="form-control" placeholder="Adresse">
+        </div>
+        <div class="col">
+          <label for="Ville">Ville</label>
+          <input type="text" class="form-control" placeholder="Ville">
+        </div>
+      </div>
+      <div class="row mt-3">
+
+        <!--FORMULAIRE DEUXIEME LIGNE-->
+        <div class="col-md-3">
+          <label for="Nom">Téléphone</label>
+          <input type="text" class="form-control" placeholder="Telephone">
+        </div>
+        <div class="col-md-3">
+          <label for="Email">E-mail</label>
+          <input type="email" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="Votre E-mail">
+        </div>
+        <div class="col-md-3">
+          <label for="Societe">Société</label>
+          <input type="text" class="form-control" placeholder="Societe">
+        </div>
+        <!--CELLULE VIDE FIN DE LIGNE-->
+        <div class="col">
+        </div>
+      </div>
+    </form>
+    <!--TITRE LOCATION-->
+    <section>
+      <div class="row">
+        <h4 class="bg-warning text-center p-3 mt-5 mb-4 rounded ">LOCATION</h4>
+      </div>
+    </section>
+    <section>
+      <!--TEXT SELECTION POUR VILLE VELO DUREE ect ....-->
+      
+    </section>
+
+    <!--FORMULAIRE LOCATION ****** selection ville-->
+    <section>
+      <div class="row">
+
+        <div class="dropdown col-md-3">
+            <h6 class="d-block ">Ville</h6>
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Selectionnez
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Paris</a>
+            <a class="dropdown-item" href="#">Lille</a>
+            <a class="dropdown-item" href="#">Lyon</a>
+            <a class="dropdown-item" href="#">Bordeaux</a>
+          </div>
+        </div>
+
+        <!--CHOIX DU VELO ELECTRIQUE OU CLASSIQUE-->
+
+        <div class="dropdown col-md-3">
+            <h6 class="d-block">Type de Vélo</h6>
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Type de Vélo
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Electrique</a>
+            <a class="dropdown-item" href="#">Classique</a>
+          </div>
+        </div>
+
+        <!--SELECTION TYPE DE LOCATION-->
+
+        <div class="dropdown col-md-3">
+            <h6 class="d-block">Type de Location</h6>
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Type de Location
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Jour</a>
+            <a class="dropdown-item" href="#">Semaine</a>
+            <a class="dropdown-item" href="#">Mois</a>
+          </div>
+        </div>
+
+
+        <!--DUREE DE LA LOCATION-->
+        <div>
+          <form>
+            <div class="form-group col-md-3>
+              <label for=" TempsLoc">La Durée </label>
+              <input type="text" class="form-control" id="TempsLoc" placeholder="inscrivez en chiffre">
+            </div>
+          </form>
+        </div>
+    </section>
+
+    <!--MONTANT TOTAL-->
+    <section>
+      <div class="row">
+        <h4 class="bg-warning text-center p-3 mt-5 mb-3 rounded ">MONTANT</h4>
+      </div>
+      <form>
+        <div class="row mt-3">
+          <div class="col-md-3">
+            <label for="Montant">Montant</label>
+            <input type="text" class="form-control" placeholder=" ">
+          </div>
+        </div>
+
+        <!--CONDITION D ACCEPTATION -->
+        <section>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+              <label class="form-check-label" for="invalidCheck2">
+                <h6 class="font-italic">J'accepte les conditions de location</h6>
+              </label>
+            </div>
+          </div>
+       
+        <a href="/paiement.html" class="btn btn-secondary mb-5" tabindex="-1" role="button"
+          aria-disabled="true">VALIDER</a>
+      </form>
+    </section>
+  </section>
+  </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
