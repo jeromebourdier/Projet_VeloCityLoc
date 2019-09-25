@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 25 sep. 2019 à 11:56
+-- Généré le :  mer. 25 sep. 2019 à 14:01
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -30,12 +30,12 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `adresse`;
 CREATE TABLE IF NOT EXISTS `adresse` (
-  `idVILLES` int(11) NOT NULL AUTO_INCREMENT,
+  `idVilles` int(11) NOT NULL AUTO_INCREMENT,
   `nom_rue` varchar(45) DEFAULT NULL,
   `numero_rue` varchar(45) DEFAULT NULL,
   `ville_idville` int(11) NOT NULL,
-  PRIMARY KEY (`idVILLES`),
-  UNIQUE KEY `idVILLES_UNIQUE` (`idVILLES`),
+  PRIMARY KEY (`idVilles`),
+  UNIQUE KEY `idVILLES_UNIQUE` (`idVilles`),
   KEY `fk_adresse_ville1_idx` (`ville_idville`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -101,8 +101,8 @@ CREATE TABLE IF NOT EXISTS `paiement` (
 DROP TABLE IF EXISTS `panier`;
 CREATE TABLE IF NOT EXISTS `panier` (
   `idPanier` int(11) NOT NULL AUTO_INCREMENT,
-  `PAIEMENT_idPAIEMENT` int(11) NOT NULL,
-  PRIMARY KEY (`idPanier`,`PAIEMENT_idPAIEMENT`),
+  `paiement_idPaiement` int(11) NOT NULL,
+  PRIMARY KEY (`idPanier`,`paiement_idPaiement`),
   UNIQUE KEY `idPANIER_UNIQUE` (`idPanier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -114,12 +114,12 @@ CREATE TABLE IF NOT EXISTS `panier` (
 
 DROP TABLE IF EXISTS `panier_has_articles`;
 CREATE TABLE IF NOT EXISTS `panier_has_articles` (
-  `PANIER_idPANIER` int(11) NOT NULL,
-  `PANIER_PAIEMENT_idPAIEMENT` int(11) NOT NULL,
-  `ARTICLES_idVELOS` int(11) NOT NULL,
-  PRIMARY KEY (`PANIER_idPANIER`,`PANIER_PAIEMENT_idPAIEMENT`,`ARTICLES_idVELOS`),
-  KEY `fk_PANIER_has_ARTICLES_ARTICLES1_idx` (`ARTICLES_idVELOS`),
-  KEY `fk_PANIER_has_ARTICLES_PANIER1_idx` (`PANIER_idPANIER`,`PANIER_PAIEMENT_idPAIEMENT`)
+  `panier_idPanier` int(11) NOT NULL,
+  `panier_paiement_idPaiement` int(11) NOT NULL,
+  `articles_idVelos` int(11) NOT NULL,
+  PRIMARY KEY (`panier_idPanier`,`panier_paiement_idPaiement`,`articles_idVelos`),
+  KEY `fk_PANIER_has_ARTICLES_ARTICLES1_idx` (`articles_idVelos`),
+  KEY `fk_PANIER_has_ARTICLES_PANIER1_idx` (`panier_idPanier`,`panier_paiement_idPaiement`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -130,12 +130,12 @@ CREATE TABLE IF NOT EXISTS `panier_has_articles` (
 
 DROP TABLE IF EXISTS `panier_has_forfaits`;
 CREATE TABLE IF NOT EXISTS `panier_has_forfaits` (
-  `PANIER_idPANIER` int(11) NOT NULL,
-  `PANIER_PAIEMENT_idPAIEMENT` int(11) NOT NULL,
-  `FORFAITS_idFORFAITS` int(11) NOT NULL,
-  PRIMARY KEY (`PANIER_idPANIER`,`PANIER_PAIEMENT_idPAIEMENT`,`FORFAITS_idFORFAITS`),
-  KEY `fk_PANIER_has_FORFAITS_FORFAITS1_idx` (`FORFAITS_idFORFAITS`),
-  KEY `fk_PANIER_has_FORFAITS_PANIER1_idx` (`PANIER_idPANIER`,`PANIER_PAIEMENT_idPAIEMENT`)
+  `panier_idPanier` int(11) NOT NULL,
+  `panier_paiement_idPaiement` int(11) NOT NULL,
+  `forfaits_idForfaits` int(11) NOT NULL,
+  PRIMARY KEY (`panier_idPanier`,`panier_paiement_idPaiement`,`forfaits_idForfaits`),
+  KEY `fk_PANIER_has_FORFAITS_FORFAITS1_idx` (`forfaits_idForfaits`),
+  KEY `fk_PANIER_has_FORFAITS_PANIER1_idx` (`panier_idPanier`,`panier_paiement_idPaiement`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -146,15 +146,15 @@ CREATE TABLE IF NOT EXISTS `panier_has_forfaits` (
 
 DROP TABLE IF EXISTS `stock`;
 CREATE TABLE IF NOT EXISTS `stock` (
-  `idSTOCK` int(11) NOT NULL AUTO_INCREMENT,
+  `idStock` int(11) NOT NULL AUTO_INCREMENT,
   `velos` int(11) DEFAULT NULL,
   `nb_velos` int(11) DEFAULT NULL,
   `date_entree` date DEFAULT NULL,
   `date_sortie` date DEFAULT NULL,
-  `ARTICLES_idVELOS` int(11) NOT NULL,
-  PRIMARY KEY (`idSTOCK`),
-  UNIQUE KEY `idSTOCK_UNIQUE` (`idSTOCK`),
-  KEY `fk_STOCK_ARTICLES1_idx` (`ARTICLES_idVELOS`)
+  `articles_idVelos` int(11) NOT NULL,
+  PRIMARY KEY (`idStock`),
+  UNIQUE KEY `idSTOCK_UNIQUE` (`idStock`),
+  KEY `fk_STOCK_ARTICLES1_idx` (`articles_idVelos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -165,19 +165,19 @@ CREATE TABLE IF NOT EXISTS `stock` (
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `idUSERS` int(11) NOT NULL AUTO_INCREMENT,
-  `NOM` mediumtext,
-  `PRENOM` mediumtext,
-  `EMAIL` longtext,
-  `PARTICULIER` int(11) DEFAULT NULL,
-  `PANIER_idPANIER` int(11) NOT NULL,
-  `PANIER_PAIEMENT_idPAIEMENT` int(11) NOT NULL,
-  `PAIEMENT_idPAIEMENT` int(11) NOT NULL,
-  `adresse_idVILLES` int(11) NOT NULL,
-  PRIMARY KEY (`idUSERS`),
-  KEY `fk_USERS_PANIER_idx` (`PANIER_idPANIER`,`PANIER_PAIEMENT_idPAIEMENT`),
-  KEY `fk_USERS_PAIEMENT1_idx` (`PAIEMENT_idPAIEMENT`),
-  KEY `fk_USERS_adresse1_idx` (`adresse_idVILLES`)
+  `idUsers` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) DEFAULT NULL,
+  `prenom` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `particulier` varchar(11) DEFAULT NULL,
+  `Panier_idPanier` int(11) NOT NULL,
+  `panier_paiement_idPaiement` int(11) NOT NULL,
+  `paiement_idPaiement` int(11) NOT NULL,
+  `adresse_idVilles` int(11) NOT NULL,
+  PRIMARY KEY (`idUsers`),
+  KEY `fk_USERS_PANIER_idx` (`Panier_idPanier`,`panier_paiement_idPaiement`),
+  KEY `fk_USERS_PAIEMENT1_idx` (`paiement_idPaiement`),
+  KEY `fk_USERS_adresse1_idx` (`adresse_idVilles`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -188,10 +188,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 DROP TABLE IF EXISTS `ville`;
 CREATE TABLE IF NOT EXISTS `ville` (
-  `idville` int(11) NOT NULL AUTO_INCREMENT,
+  `idVille` int(11) NOT NULL AUTO_INCREMENT,
   `cp` varchar(45) DEFAULT NULL,
   `nom_ville` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idville`)
+  PRIMARY KEY (`idVille`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -202,35 +202,35 @@ CREATE TABLE IF NOT EXISTS `ville` (
 -- Contraintes pour la table `adresse`
 --
 ALTER TABLE `adresse`
-  ADD CONSTRAINT `fk_adresse_ville1` FOREIGN KEY (`ville_idville`) REFERENCES `ville` (`idville`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_adresse_ville1` FOREIGN KEY (`ville_idville`) REFERENCES `ville` (`idVille`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `panier_has_articles`
 --
 ALTER TABLE `panier_has_articles`
-  ADD CONSTRAINT `fk_PANIER_has_ARTICLES_ARTICLES1` FOREIGN KEY (`ARTICLES_idVELOS`) REFERENCES `articles` (`idArticle`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_PANIER_has_ARTICLES_PANIER1` FOREIGN KEY (`PANIER_idPANIER`,`PANIER_PAIEMENT_idPAIEMENT`) REFERENCES `panier` (`idPanier`, `PAIEMENT_idPAIEMENT`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_PANIER_has_ARTICLES_ARTICLES1` FOREIGN KEY (`articles_idVelos`) REFERENCES `articles` (`idArticle`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_PANIER_has_ARTICLES_PANIER1` FOREIGN KEY (`panier_idPanier`,`panier_paiement_idPaiement`) REFERENCES `panier` (`idPanier`, `paiement_idPaiement`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `panier_has_forfaits`
 --
 ALTER TABLE `panier_has_forfaits`
-  ADD CONSTRAINT `fk_PANIER_has_FORFAITS_FORFAITS1` FOREIGN KEY (`FORFAITS_idFORFAITS`) REFERENCES `forfaits` (`idForfaits`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_PANIER_has_FORFAITS_PANIER1` FOREIGN KEY (`PANIER_idPANIER`,`PANIER_PAIEMENT_idPAIEMENT`) REFERENCES `panier` (`idPanier`, `PAIEMENT_idPAIEMENT`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_PANIER_has_FORFAITS_FORFAITS1` FOREIGN KEY (`forfaits_idForfaits`) REFERENCES `forfaits` (`idForfaits`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_PANIER_has_FORFAITS_PANIER1` FOREIGN KEY (`panier_idPanier`,`panier_paiement_idPaiement`) REFERENCES `panier` (`idPanier`, `paiement_idPaiement`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `stock`
 --
 ALTER TABLE `stock`
-  ADD CONSTRAINT `fk_STOCK_ARTICLES1` FOREIGN KEY (`ARTICLES_idVELOS`) REFERENCES `articles` (`idArticle`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_STOCK_ARTICLES1` FOREIGN KEY (`articles_idVelos`) REFERENCES `articles` (`idArticle`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `fk_USERS_PAIEMENT1` FOREIGN KEY (`PAIEMENT_idPAIEMENT`) REFERENCES `paiement` (`idPaiement`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_USERS_PANIER` FOREIGN KEY (`PANIER_idPANIER`,`PANIER_PAIEMENT_idPAIEMENT`) REFERENCES `panier` (`idPanier`, `PAIEMENT_idPAIEMENT`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_USERS_adresse1` FOREIGN KEY (`adresse_idVILLES`) REFERENCES `adresse` (`idVILLES`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_USERS_PAIEMENT1` FOREIGN KEY (`paiement_idPaiement`) REFERENCES `paiement` (`idPaiement`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_USERS_PANIER` FOREIGN KEY (`Panier_idPanier`,`panier_paiement_idPaiement`) REFERENCES `panier` (`idPanier`, `paiement_idPaiement`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_USERS_adresse1` FOREIGN KEY (`adresse_idVilles`) REFERENCES `adresse` (`idVilles`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
